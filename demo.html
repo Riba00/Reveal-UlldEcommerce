@@ -29,9 +29,9 @@
 			<div class="slides">
 				<!-- PORTADA -->
 				<section>
-					<a href="https://revealjs.com">
-						<img src="Selecció_080-removebg-preview.png" alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
-					</a>
+					<h1>
+						<a href="http://ulldecommerce.jriba.me/login">UlldEcommerce</a>
+					</h1>
 					<h3>Projecte Web</h3>
 					<p>
 						<small>Created by <a href="https://github.com/Riba00">Jordi Riba</a></small>
@@ -100,7 +100,7 @@
 							<li>Suport</li>
 						</ul>
 						<br>
-						<a href="https://chat.openai.com/chat">Link web</a>
+						<a href="http://ulldecommerce.jriba.me">Link web</a>
 					</section>
 
 					<section>
@@ -134,22 +134,29 @@
 					</section>
 					<section>
 						<h4>Acceptació de cookies</h4>
-						<p>
-							<a href="https://github.com/spatie/laravel-cookie-consent">Spatie/laravel-cookie-consent</a>
-							<p>Ruta de l'arxiu del text</p>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
-							<!-- TODO posar codi de la config -->
+						<a href="https://github.com/spatie/laravel-cookie-consent">Spatie/laravel-cookie-consent</a>
+						<p>lang/vendor/cookie-consent/ca/texts.php</p>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4,5"><script type="text/template">
+							<?php
+
+							return [
+								'message' => "La vostra experiència en aquest lloc serà millorada amb l'ús de cookies",
+								'agree' => 'Acceptar',
+								];
 							</script></code></pre>
 
 						<p>
 							Vista a aplicar
 						</p>
 						<section data-auto-animate>
-							<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
-							<!-- TODO posar codi de la vista del include -->
+							<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|2"><script type="text/template">
+							<main>
+									@include('cookie-consent::index')
+									<div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
+										<div class="mx-auto max-w-7xl lg:px-8">
+											<div class="lg:grid lg:grid-cols-2 lg:gap-8">
 							</script></code></pre>
 						</section>
-
 					</section>
 				</section>
 				<!-- SPRINT 3 -->
@@ -157,57 +164,38 @@
 					<section>
 						<h2>SPRINT 3</h2>
 						<h4>Gestor de newsletter</h4>
-						<a href="https://github.com/spatie/laravel-cookie-consent">Spatie/laravel-cookie-consent</a>
-					</section>
-					<section>
-						<p>Twitter</p>
-						<a href="https://twitter.com/UlldEcommerce">
-							<img src="Twitter.png" alt="Perfil Twitter">
+						<a href="https://github.com/spatie/laravel-newsletter">Spatie/laravel-newsletter</a>
+						<a href="https://mailchimp.com/?currency=EUR">
+							<img src="Mailchimp.jpg" alt="">
 						</a>
 					</section>
-					<section>
-						<h4>LANDING PAGE</h4>
-						<ul>
-							<li>Clients</li>
-							<ul>
-								<li>CTA</li>
-								<li>Vista de la web</li>
-								<li>Opinions</li>
-							</ul>
-							<li>Empreses</li>
-							<ul>
-								<li>Beneficis</li>
-								<li>Preus</li>
-								<li>Testomoni</li>
-							</ul>
-							<li>Suport</li>
-						</ul>
-						<br>
-						<a href="https://chat.openai.com/chat">Link web</a>
-					</section>
 
 					<section>
-						<h2>Sistema d'autenticació</h2>
-						<a href="https://jetstream.laravel.com/2.x/introduction.html">
-							<img src="LaravelJetstream.png" alt="">
-						</a>
-
-					</section>
-					<section>
-						<h2>Laravel Jetstream</h2>
-						<ul>
-							<li>Autenticació de l'usuari</li>
-							<li>Gestió de rols i permisos</li>
-							<li>Administració de perfils d'usuari</li>
-							<li>...</li>
-						</ul>
-
+						<p>Controller</p>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4|7-8|10-11"><script type="text/template">
+							public function subscribe(Request $request)
+							{
+								$request->validate([
+									'email'=>'required|email'
+								]);
+								try {
+									if (Newsletter::isSubscribed($request->email)){
+										return redirect()->back()->withErrors(['msg' => 'Email ja subscrit']);
+									} else{
+										Newsletter::subscribe($request->email);
+										session()->flash('status','Email subscrit correctament');
+									}   return redirect()->route('welcome');
+								}catch (Exception $e){
+									return redirect()->back()->with('errors',collect([$e->getMessage()]));
+								}
+							}
+						</script></code></pre>
 					</section>
 				</section>
 
 				<!-- CONCLUSION -->
 				<section>
-
+					<h2>CONCLUSIÓ</h2>
 				</section>
 			</div>
 		</div>
