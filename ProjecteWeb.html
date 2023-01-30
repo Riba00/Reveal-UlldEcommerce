@@ -62,7 +62,7 @@
 
 						<li>Sprint 3</li>
 						<ul>
-							<li>Gestor de newsletter</li>
+							<li>Gestor de Newsletter</li>
 						</ul>
 					</ul>
 				</section>
@@ -171,6 +171,13 @@
 					</section>
 
 					<section>
+						<p>.env</p>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="1|2|"><script type="text/template">
+							MAILCHIMP_APIKEY
+							MAILCHIMP_LIST_ID
+						</script></code></pre>
+
+
 						<p>Controller</p>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|4|7-8|10-11"><script type="text/template">
 							public function subscribe(Request $request)
@@ -191,11 +198,55 @@
 							}
 						</script></code></pre>
 					</section>
+					<section>
+						<p>Vista</p>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="|1|21|31|"><script type="text/template">
+							@if ($errors->any())
+							<div class="alert alert-danger">
+							<div class=" mt-2 rounded-md bg-red-50 p-4">
+								<div class="flex">
+									@foreach ($errors->all() as $error)
+									<div class="flex-shrink-0">
+										<!-- Heroicon name: mini/x-circle -->
+										<svg class="w-1/2 h-4 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+											<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+										</svg>
+									</div>
+									<div class="ml-3">
+										<h3 class="text-sm font-medium text-red-800">{{ $error}}</h3>
+									</div>
+									@endforeach
+								</div>
+							</div>
+						</div>
+							@endif
+
+							@if (session()->has('status'))
+							<div class=" mt-2 rounded-md bg-green-50 p-4">
+							<div class="flex">
+								<div class="flex-shrink-0">
+									<!-- Heroicon name: mini/x-circle -->
+									<svg class="w-1/2 h-4 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-green-800">{{ session('status') }}</h3>
+								</div>
+							</div>
+						</div>
+							@endif
+						</script></code></pre>
+					</section>
 				</section>
 
 				<!-- CONCLUSION -->
 				<section>
 					<h2>CONCLUSIÓ</h2>
+				</section>
+
+				<section>
+					<h2>MOLTES GRÀCIES PER LA VOSTRA ATENCIÓ</h2>
 				</section>
 			</div>
 		</div>
